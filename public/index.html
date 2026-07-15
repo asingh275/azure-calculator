@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Simple Calculator - Azure Demo</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background: #f0f0f0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 40px;
+  }
+  .calculator {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    padding: 20px;
+    width: 260px;
+  }
+  #display {
+    width: 100%;
+    height: 50px;
+    font-size: 24px;
+    text-align: right;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    padding: 5px;
+  }
+  .buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+  }
+  button {
+    padding: 15px;
+    font-size: 18px;
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+    background: #e0e0e0;
+  }
+  button:hover { background: #d0d0d0; }
+  .op { background: #ffb84d; }
+  .equals { background: #4caf50; color: white; grid-column: span 2; }
+  .clear { background: #f44336; color: white; }
+  #slot-banner {
+    margin-bottom: 15px;
+    font-size: 13px;
+    color: #555;
+    background: #fff9c4;
+    padding: 5px 10px;
+    border-radius: 4px;
+  }
+</style>
+</head>
+<body>
+
+<div id="slot-banner">Slot: loading...</div>
+
+<div class="calculator">
+  <input type="text" id="display" disabled>
+  <div class="buttons">
+    <button class="clear" onclick="clearDisplay()">C</button>
+    <button onclick="appendVal('(')">(</button>
+    <button onclick="appendVal(')')">)</button>
+    <button class="op" onclick="appendVal('/')">÷</button>
+
+    <button onclick="appendVal('7')">7</button>
+    <button onclick="appendVal('8')">8</button>
+    <button onclick="appendVal('9')">9</button>
+    <button class="op" onclick="appendVal('*')">×</button>
+
+    <button onclick="appendVal('4')">4</button>
+    <button onclick="appendVal('5')">5</button>
+    <button onclick="appendVal('6')">6</button>
+    <button class="op" onclick="appendVal('-')">-</button>
+
+    <button onclick="appendVal('1')">1</button>
+    <button onclick="appendVal('2')">2</button>
+    <button onclick="appendVal('3')">3</button>
+    <button class="op" onclick="appendVal('+')">+</button>
+
+    <button onclick="appendVal('0')">0</button>
+    <button onclick="appendVal('.')">.</button>
+    <button class="equals" onclick="calculate()">=</button>
+  </div>
+</div>
+
+<script>
+  const display = document.getElementById('display');
+
+  function appendVal(val) {
+    display.value += val;
+  }
+
+  function clearDisplay() {
+    display.value = '';
+  }
+
+  function calculate() {
+    try {
+      // NOTE: uses eval() for simplicity only - this is a learning/demo app, not production code
+      display.value = eval(display.value);
+    } catch (e) {
+      display.value = 'Error';
+    }
+  }
+
+  // Fetch version/slot info so you can visually tell which deployment slot you're on
+  fetch('/api/version')
+    .then(res => res.json())
+    .then(data => {
+      document.getElementById('slot-banner').textContent =
+        `Slot: ${data.slot} | Version: ${data.version} | Host: ${data.hostname}`;
+    })
+    .catch(() => {
+      document.getElementById('slot-banner').textContent = 'Slot: unavailable';
+    });
+</script>
+
+</body>
+</html>
