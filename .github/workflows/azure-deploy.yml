@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 env:
-  AZURE_WEBAPP_NAME: your-app-name-here   # CHANGE THIS to your App Service name
+  AZURE_WEBAPP_NAME: testlearning   # CHANGE THIS to your App Service name
   # AZURE_WEBAPP_SLOT_NAME: staging       # Uncomment + set this to deploy to a specific slot
 
 jobs:
