@@ -2,20 +2,20 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Simple Calculator - Azure Demo</title>
+<title>Simple Calculator v2 - Azure Demo</title>
 <style>
   body {
     font-family: Arial, sans-serif;
-    background: #f0f0f0;
+    background: #0d1b2a;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding-top: 40px;
   }
   .calculator {
-    background: #fff;
+    background: #1b263b;
     border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.4);
     padding: 20px;
     width: 260px;
   }
@@ -27,6 +27,9 @@
     margin-bottom: 10px;
     box-sizing: border-box;
     padding: 5px;
+    background: #e0e1dd;
+    border: none;
+    border-radius: 4px;
   }
   .buttons {
     display: grid;
@@ -39,24 +42,30 @@
     cursor: pointer;
     border: none;
     border-radius: 4px;
-    background: #e0e0e0;
+    background: #415a77;
+    color: #e0e1dd;
   }
-  button:hover { background: #d0d0d0; }
-  .op { background: #ffb84d; }
-  .equals { background: #4caf50; color: white; grid-column: span 2; }
-  .clear { background: #f44336; color: white; }
+  button:hover { background: #778da9; }
+  .op { background: #2196f3; }
+  .equals { background: #00c853; color: white; grid-column: span 2; }
+  .clear { background: #e53935; color: white; }
   #slot-banner {
     margin-bottom: 15px;
     font-size: 13px;
-    color: #555;
-    background: #fff9c4;
+    color: #0d1b2a;
+    background: #90caf9;
     padding: 5px 10px;
     border-radius: 4px;
+  }
+  h2 {
+    color: #e0e1dd;
+    margin-bottom: 5px;
   }
 </style>
 </head>
 <body>
 
+<h2>Calculator v2</h2>
 <div id="slot-banner">Slot: loading...</div>
 
 <div class="calculator">
@@ -84,6 +93,7 @@
 
     <button onclick="appendVal('0')">0</button>
     <button onclick="appendVal('.')">.</button>
+    <button class="op" onclick="applyPercent()">%</button>
     <button class="equals" onclick="calculate()">=</button>
   </div>
 </div>
@@ -97,6 +107,14 @@
 
   function clearDisplay() {
     display.value = '';
+  }
+
+  function applyPercent() {
+    try {
+      display.value = eval(display.value) / 100;
+    } catch (e) {
+      display.value = 'Error';
+    }
   }
 
   function calculate() {

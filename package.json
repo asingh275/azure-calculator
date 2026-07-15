@@ -1,7 +1,7 @@
 {
   "name": "azure-calculator",
-  "version": "1.0.0",
-  "description": "Simple calculator app for Azure App Service testing (AZ-104 practice)",
+  "version": "2.0.0",
+  "description": "Simple calculator app for Azure App Service testing (AZ-104 practice) - v2",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"

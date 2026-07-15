@@ -11,7 +11,7 @@ app.use(express.static(path.join(__dirname, "public")));
 // Simple health/version endpoint - handy for checking which slot you're hitting
 app.get("/api/version", (req, res) => {
   res.json({
-    version: "1.0.0",
+    version: "2.0.0",
     // SLOT_NAME is a custom App Setting you set yourself in each slot (see README)
     // - useful for visually confirming which slot you're hitting
     slot: process.env.SLOT_NAME || "not set",
@@ -20,5 +20,5 @@ app.get("/api/version", (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`Calculator app listening on port ${port}`);
+  console.log(`Calculator app (v2) listening on port ${port}`);
 });
